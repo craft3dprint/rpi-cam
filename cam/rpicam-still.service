@@ -1,0 +1,17 @@
+[Unit]
+Description=Run rpicam-still after camera detection
+After=multi-user.target
+Wants=dev-video0.device
+After=dev-video0.device
+
+[Service]
+Type=simple
+ExecStartPre=/usr/local/bin/capture_images.sh & sleep 4
+ExecStart=/usr/bin/python3 /home/$USER/button_trigger.py &
+Restart=on-failure
+RestartSec=5
+User=$USER
+WorkingDirectory=/home/$USER/
+
+[Install]
+WantedBy=multi-user.target

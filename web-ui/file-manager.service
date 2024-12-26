@@ -1,0 +1,15 @@
+[Unit]
+Description=File Manager Flask App
+After=network.target
+
+[Service]
+User=$USER
+Group=$USER
+WorkingDirectory=/home/$USER
+ExecStart=/usr/bin/python3 /home/$USER/web-app/file_manager.py
+Restart=always
+Environment=FLASK_APP=file_manager.py
+Environment=FLASK_ENV=production
+
+[Install]
+WantedBy=multi-user.target
